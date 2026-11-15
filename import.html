@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nhập dữ liệu — QuizHub</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container import-wrap">
+    <!-- Chưa đăng nhập -->
+    <section class="card auth-card" id="need-login" hidden style="margin:24px auto">
+      <h1>Cần đăng nhập giảng viên</h1>
+      <p class="muted">Trang Nhập dữ liệu chỉ dành cho giảng viên.</p>
+      <a class="btn btn-primary" href="admin.html">Đến trang đăng nhập</a>
+    </section>
+
+    <div id="import-root" hidden>
+      <div class="admin-head">
+        <div>
+          <a href="admin.html" class="back-link">← Kết quả bài thi</a>
+          <h1>Nhập dữ liệu</h1>
+          <p class="muted">Nhập danh sách sinh viên và đề thi từ Excel hoặc CSV.</p>
+        </div>
+      </div>
+
+      <div class="alert" id="source-banner" role="status"></div>
+
+      <!-- Bước 1 -->
+      <section class="card step">
+        <h2 class="step-title"><span class="step-no">1</span> Chuẩn bị file theo mẫu</h2>
+        <p class="muted">Một file Excel có thể chứa cả sheet <strong>SinhVien</strong> và <strong>DeThi</strong>, hoặc dùng từng file CSV riêng. Muốn sửa dữ liệu đang có, hãy xuất ra Excel, sửa rồi nhập lại.</p>
+        <div class="btn-row wrap-row">
+          <button class="btn btn-outline" type="button" id="tpl-xlsx">File mẫu Excel (.xlsx)</button>
+          <button class="btn btn-outline" type="button" id="tpl-csv-sv">Mẫu sinh viên (.csv)</button>
+          <button class="btn btn-outline" type="button" id="tpl-csv-de">Mẫu đề thi (.csv)</button>
+          <button class="btn btn-ghost" type="button" id="export-xlsx">Xuất dữ liệu hiện có (.xlsx)</button>
+        </div>
+        <details class="spec">
+          <summary>Quy định các cột</summary>
+          <div class="grid-2">
+            <div>
+              <h3>Sheet SinhVien</h3>
+              <table class="table table-compact">
+                <thead><tr><th scope="col">Cột</th><th scope="col">Bắt buộc</th><th scope="col">Ghi chú</th></tr></thead>
+                <tbody>
+                  <tr><td>MSSV</td><td>Có</td><td>Chữ và số, không trùng. Định dạng cột là Text.</td></tr>
+                  <tr><td>Họ tên</td><td>Có</td><td></td></tr>
+                  <tr><td>Lớp</td><td>Không</td><td></td></tr>
+                  <tr><td>Mã đề</td><td>Có</td><td>Phải có đề tương ứng.</td></tr>
+                  <tr><td>Email</td><td>Không</td><td>Dùng khi gửi bản sao kết quả cho SV.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h3>Sheet DeThi</h3>
+              <table class="table table-compact">
+                <thead><tr><th scope="col">Cột</th><th scope="col">Bắt buộc</th><th scope="col">Ghi chú</th></tr></thead>
+                <tbody>
+                  <tr><td>Mã đề</td><td>Dòng đầu mỗi đề</td><td>Chữ, số, "-", "_".</td></tr>
+                  <tr><td>Tiêu đề</td><td>Dòng đầu mỗi đề</td><td></td></tr>
+                  <tr><td>Thời gian (phút)</td><td>Dòng đầu mỗi đề</td><td>1–600.</td></tr>
+                  <tr><td>STT</td><td>Không</td><td>Chỉ để dễ đọc.</td></tr>
+                  <tr><td>Nội dung câu hỏi</td><td>Có</td><td></td></tr>
+                  <tr><td>A, B, C, D (E, F)</td><td>Ít nhất 2</td><td>Không bỏ trống ở giữa.</td></tr>
+                  <tr><td>Đáp án</td><td>Có</td><td>Một chữ: A, B, C…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- Bước 2 -->
+      <section class="card step">
+        <h2 class="step-title"><span class="step-no">2</span> Chọn file</h2>
+        <label class="dropzone" id="dropzone">
+          <input type="file" id="file-input" accept=".xlsx,.xls,.csv" multiple>
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M20 16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3"/></svg>
+          <strong>Kéo thả file vào đây hoặc bấm để chọn</strong>
+          <span class="muted">.xlsx, .xls, .csv — có thể chọn nhiều file</span>
+        </label>
+        <div id="file-list" class="file-list"></div>
+      </section>
+
+      <!-- Bước 3 -->
+      <section class="card step" id="check-step" hidden>
+        <h2 class="step-title"><span class="step-no">3</span> Kiểm tra</h2>
+        <div id="summary" class="summary"></div>
+        <div id="issues"></div>
+        <div id="preview"></div>
+      </section>
+
+      <!-- Bước 4 -->
+      <section class="card step" id="apply-step" hidden>
+        <h2 class="step-title"><span class="step-no">4</span> Áp dụng</h2>
+        <div class="grid-2 apply-grid">
+          <div class="apply-box">
+            <h3 id="try-title">Dùng thử ngay trên trình duyệt này</h3>
+            <p class="muted" id="try-text">Sinh viên đăng nhập <strong>trên máy này</strong> sẽ dùng dữ liệu mới ngay. Hợp để kiểm tra đề hoặc demo trên lớp. Có thể quay về dữ liệu gốc bất kỳ lúc nào.</p>
+            <button class="btn btn-primary" type="button" id="apply-btn">Dùng thử dữ liệu này</button>
+          </div>
+          <div class="apply-box" id="files-box">
+            <h3>Cập nhật website cho mọi máy</h3>
+            <ol class="list">
+              <li>Tải gói dữ liệu (.zip) và giải nén.</li>
+              <li>Chép thư mục <code>data</code> vào thư mục website, chọn <strong>Thay thế</strong>.</li>
+              <li>Tải lại trang. Nếu dùng GitHub Pages: tải các file mới lên repository.</li>
+            </ol>
+            <button class="btn btn-outline" type="button" id="zip-btn">Tải gói dữ liệu (.zip)</button>
+            <details class="spec"><summary>Tải từng file</summary><ul class="file-links" id="file-links"></ul></details>
+          </div>
+        </div>
+      </section>
+
+      <!-- Giảng viên -->
+      <section class="card step">
+        <h2 class="step-title"><span class="step-no">GV</span> Thông tin giảng viên</h2>
+        <p class="muted">Bản tĩnh có <strong>một</strong> tài khoản giảng viên, khai báo trong <code>js/config.js</code>. Nhập thông tin mới rồi chép đoạn cấu hình bên dưới vào file đó. Muốn có nhiều tài khoản giảng viên thì cần chuyển lên server.</p>
+        <div class="grid-2">
+          <div class="field"><label for="t-email">Email nhận kết quả</label><input class="input" id="t-email" type="email" placeholder="giangvien@truong.edu.vn"></div>
+          <div class="field"><label for="t-pass">Mật khẩu trang Giảng viên</label><input class="input" id="t-pass" type="text" autocomplete="off" placeholder="Mật khẩu mới"></div>
+        </div>
+        <pre class="snippet" id="t-snippet" aria-live="polite"></pre>
+        <button class="btn btn-outline btn-sm" type="button" id="t-copy">Sao chép đoạn cấu hình</button>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/adapters/emailjs-mailer.js"></script>
+  <script src="js/adapters/local.js"></script>
+  <script src="js/adapters/server.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data-importer.js"></script>
+  <script src="js/import.js"></script>
+</body>
+</html>

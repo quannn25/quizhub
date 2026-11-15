@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vào thi — QuizHub</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="auth-wrap">
+    <!-- Bước 1: nhập MSSV -->
+    <section class="card auth-card" id="login-card">
+      <h1>Vào phòng thi</h1>
+      <p class="muted">Nhập mã số sinh viên để nhận mã đề của bạn.</p>
+      <div class="alert alert-error" id="login-error" role="alert" hidden></div>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="mssv">Mã số sinh viên</label>
+          <input class="input" id="mssv" name="mssv" inputmode="numeric" autocomplete="off" placeholder="VD: 22110001" required autofocus>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" id="login-btn" type="submit">Tiếp tục</button>
+      </form>
+      <p class="demo-hint">Dữ liệu demo: MSSV từ <code>22110001</code> đến <code>22110010</code>.</p>
+    </section>
+
+    <!-- Bước 2: xác nhận thông tin, đồng ý quy chế -->
+    <section class="card auth-card" id="info-card" hidden aria-live="polite"></section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/adapters/emailjs-mailer.js"></script>
+  <script src="js/adapters/local.js"></script>
+  <script src="js/adapters/server.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

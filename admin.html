@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giảng viên — QuizHub</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <!-- Đăng nhập giảng viên -->
+    <div class="auth-wrap" id="admin-login" hidden>
+      <section class="card auth-card">
+        <h1>Khu vực giảng viên</h1>
+        <p class="muted">Xem danh sách sinh viên, mã đề và kết quả bài thi.</p>
+        <div class="alert alert-error" id="admin-error" role="alert" hidden></div>
+        <form id="admin-form" novalidate>
+          <div class="field">
+            <label for="admin-password">Mật khẩu</label>
+            <input class="input" id="admin-password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg" id="admin-btn" type="submit">Đăng nhập</button>
+        </form>
+        <p class="demo-hint" id="admin-hint"></p>
+      </section>
+    </div>
+
+    <!-- Bảng điều khiển -->
+    <div class="container admin-wrap" id="admin-dash" hidden>
+      <div class="admin-head">
+        <div>
+          <h1>Kết quả bài thi</h1>
+          <p class="muted" id="updated-at" aria-live="polite"></p>
+        </div>
+        <div class="btn-row admin-actions">
+          <a class="btn btn-outline btn-sm" href="import.html">Nhập dữ liệu</a>
+          <button class="btn btn-outline btn-sm" id="refresh-btn" type="button">Làm mới</button>
+          <button class="btn btn-primary btn-sm" id="csv-btn" type="button">Xuất CSV</button>
+          <button class="btn btn-ghost btn-sm" id="logout-btn" type="button">Đăng xuất</button>
+        </div>
+      </div>
+
+      <div class="alert alert-warn" id="scope-note" hidden></div>
+      <div class="alert alert-info banner-row" id="import-note" hidden></div>
+
+      <section class="kpis" id="kpis" aria-label="Tổng quan"></section>
+
+      <div class="admin-grid">
+        <section class="card">
+          <h2 class="card-title">Phân bố xếp loại</h2>
+          <div id="dist" class="dist"></div>
+        </section>
+        <section class="card">
+          <h2 class="card-title">Theo mã đề</h2>
+          <div id="by-exam"></div>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="table-tools">
+          <h2 class="card-title">Danh sách sinh viên</h2>
+          <div class="filters">
+            <input class="input input-sm" id="f-search" type="search" placeholder="Tìm MSSV hoặc họ tên" aria-label="Tìm MSSV hoặc họ tên">
+            <select class="input input-sm" id="f-exam" aria-label="Lọc theo mã đề"><option value="">Tất cả mã đề</option></select>
+            <select class="input input-sm" id="f-status" aria-label="Lọc theo trạng thái">
+              <option value="">Tất cả trạng thái</option>
+              <option value="submitted">Đã nộp</option>
+              <option value="in_progress">Đang làm</option>
+              <option value="expired">Hết giờ, chưa nộp</option>
+              <option value="not_started">Chưa thi</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table" id="table">
+            <thead>
+              <tr>
+                <th data-sort="mssv" scope="col">MSSV</th>
+                <th data-sort="hoTen" scope="col">Họ tên</th>
+                <th data-sort="maDe" scope="col">Mã đề</th>
+                <th data-sort="status" scope="col">Trạng thái</th>
+                <th data-sort="answered" scope="col" class="num">Đã làm</th>
+                <th data-sort="score" scope="col" class="num">Điểm</th>
+                <th data-sort="violations" scope="col" class="num">Vi phạm</th>
+                <th data-sort="submittedAt" scope="col">Nộp lúc</th>
+                <th scope="col">Email</th>
+                <th scope="col"><span class="sr-only">Thao tác</span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <p class="muted table-foot" id="table-foot"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/adapters/emailjs-mailer.js"></script>
+  <script src="js/adapters/local.js"></script>
+  <script src="js/adapters/server.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phòng thi — QuizHub</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="exam-page">
+  <!-- Thanh trạng thái: thời gian còn lại, số câu đã làm / còn lại -->
+  <div class="exam-topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-info">
+        <div class="exam-title" id="exam-title">Đang tải đề thi…</div>
+        <div class="exam-student" id="exam-student"></div>
+      </div>
+      <div class="topbar-stats">
+        <div class="stat"><span class="stat-label">Đã làm</span><span class="stat-value" id="stat-done">0</span></div>
+        <div class="stat"><span class="stat-label">Còn lại</span><span class="stat-value" id="stat-left">0</span></div>
+        <div class="stat stat-violation" id="stat-violation-box" title="Số lần vi phạm quy chế"><span class="stat-label">Vi phạm</span><span class="stat-value" id="stat-violation">0</span></div>
+        <div class="timer" id="timer" role="timer" aria-label="Thời gian còn lại">
+          <span class="stat-label">Thời gian còn lại</span>
+          <span class="timer-value" id="timer-value">--:--</span>
+        </div>
+      </div>
+    </div>
+    <div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+  </div>
+
+  <main class="container exam-layout" id="exam-root" hidden>
+    <!-- Câu hỏi hiện tại -->
+    <section class="card question-card" aria-labelledby="q-text">
+      <div class="q-head">
+        <span class="q-index" id="q-index">Câu 1</span>
+        <button class="btn btn-ghost btn-sm flag-btn" id="flag-btn" type="button" aria-pressed="false"></button>
+      </div>
+      <h2 class="q-text" id="q-text"></h2>
+      <div class="options" id="options" role="radiogroup" aria-labelledby="q-text"></div>
+      <div class="q-actions">
+        <button class="btn btn-outline" id="prev-btn" type="button">← Câu trước</button>
+        <button class="btn btn-ghost btn-sm" id="clear-btn" type="button">Xóa lựa chọn</button>
+        <button class="btn btn-primary" id="next-btn" type="button">Câu sau →</button>
+      </div>
+    </section>
+
+    <!-- Bảng câu hỏi + nộp bài -->
+    <aside class="card navigator" aria-label="Danh sách câu hỏi">
+      <h3>Danh sách câu hỏi</h3>
+      <div class="nav-grid" id="nav-grid"></div>
+      <ul class="legend">
+        <li><i class="l-answered"></i> Đã làm</li>
+        <li><i></i> Chưa làm</li>
+        <li><i class="l-flagged"></i> Đánh dấu xem lại</li>
+        <li><i class="l-current"></i> Đang xem</li>
+      </ul>
+      <p class="save-status" id="save-status" aria-live="polite"></p>
+      <button class="btn btn-danger btn-block btn-lg" id="submit-btn" type="button">Nộp bài</button>
+      <p class="hint">Phím tắt: ← → chuyển câu · 1–4 hoặc A–D chọn đáp án · F đánh dấu</p>
+    </aside>
+  </main>
+
+  <!-- Lớp phủ giám sát: yêu cầu toàn màn hình / cảnh báo vi phạm (js/proctor.js điều khiển) -->
+  <div class="overlay proctor-overlay" id="proctor-overlay" role="alertdialog" aria-modal="true" aria-labelledby="proctor-title" aria-describedby="proctor-text" hidden>
+    <div class="card overlay-box">
+      <div class="proctor-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+      </div>
+      <h2 id="proctor-title"></h2>
+      <p class="muted" id="proctor-text"></p>
+      <button class="btn btn-primary btn-lg btn-block" id="proctor-btn" type="button"></button>
+    </div>
+  </div>
+
+  <!-- Lớp phủ: đang tải / đang nộp / lỗi -->
+  <div class="overlay" id="overlay" role="status" aria-live="assertive">
+    <div class="card overlay-box">
+      <div class="spinner" id="overlay-spinner"></div>
+      <h2 id="overlay-title">Đang tải đề thi…</h2>
+      <p class="muted" id="overlay-text"></p>
+      <div class="btn-row" id="overlay-actions"></div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/adapters/emailjs-mailer.js"></script>
+  <script src="js/adapters/local.js"></script>
+  <script src="js/adapters/server.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/proctor.js"></script>
+  <script src="js/exam.js"></script>
+</body>
+</html>

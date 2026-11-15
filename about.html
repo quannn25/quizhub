@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giới thiệu — QuizHub</title>
+  <meta name="description" content="Giới thiệu đề án QuizHub: mục tiêu, công nghệ, kiến trúc, sơ đồ website và nhóm thực hiện.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main class="container about">
+    <section class="about-hero">
+      <span class="badge">Đề án môn Thiết kế Web &amp; Đồ họa</span>
+      <h1>Về QuizHub</h1>
+      <p class="lead">QuizHub là website thi trắc nghiệm online dành cho lớp học. Sinh viên đăng nhập bằng MSSV, nhận đúng mã đề, làm bài có giám sát và biết điểm ngay sau khi nộp. Giảng viên nhận kết quả qua email và theo dõi cả lớp trên một trang.</p>
+    </section>
+
+    <nav class="toc card" aria-label="Mục lục">
+      <a href="#muc-tieu">Mục tiêu</a>
+      <a href="#tinh-nang">Tính năng</a>
+      <a href="#cong-nghe">Công nghệ</a>
+      <a href="#kien-truc">Kiến trúc</a>
+      <a href="#so-do">Sơ đồ website</a>
+      <a href="#gioi-han">Giới hạn &amp; hướng phát triển</a>
+      <a href="#nhom">Nhóm thực hiện</a>
+    </nav>
+
+    <section class="about-section" id="muc-tieu">
+      <h2>1. Mục tiêu</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Đúng người, đúng đề</h3><p class="muted">Mỗi MSSV được gán sẵn một mã đề và chỉ được làm bài một lần.</p></div>
+        <div class="card"><h3>Công bằng</h3><p class="muted">Cùng thời lượng cho mọi sinh viên; ghi nhận khi rời khỏi phòng thi; hết giờ tự nộp.</p></div>
+        <div class="card"><h3>Nhanh &amp; minh bạch</h3><p class="muted">Chấm điểm tự động, sinh viên xem lại từng câu, giảng viên nhận kết quả qua email.</p></div>
+      </div>
+    </section>
+
+    <section class="about-section" id="tinh-nang">
+      <h2>2. Tính năng</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th scope="col">Nhóm</th><th scope="col">Tính năng</th></tr></thead>
+          <tbody>
+            <tr><td>Đăng nhập</td><td>Nhập MSSV, xem họ tên / lớp / mã đề, đồng ý quy chế; chặn thi lại sau khi đã nộp.</td></tr>
+            <tr><td>Phòng thi</td><td>Đồng hồ đếm ngược (đổi màu khi còn 5 phút và 1 phút), số câu đã làm / còn lại, bảng câu hỏi, đánh dấu xem lại, phím tắt, tự lưu bài.</td></tr>
+            <tr><td>Nộp bài</td><td>Xác nhận trước khi nộp; hết giờ tự nộp; tải lại trang không mất bài và không reset giờ.</td></tr>
+            <tr><td>Giám sát</td><td>Bắt buộc toàn màn hình; phát hiện chuyển tab / cửa sổ / thoát toàn màn hình; vi phạm 3 lần tự nộp; chặn chuột phải, copy, F12.</td></tr>
+            <tr><td>Kết quả</td><td>Chấm điểm thang 10, xếp loại, xem lại đáp án; gửi email cho giảng viên theo mẫu, có nút gửi lại khi lỗi mạng.</td></tr>
+            <tr><td>Giảng viên</td><td>Thống kê, phân bố xếp loại, điểm theo mã đề; tìm kiếm / lọc / sắp xếp; xem chi tiết, chấm bài bỏ dở, cho thi lại; xuất CSV.</td></tr>
+            <tr><td>Nhập dữ liệu</td><td>Nhập danh sách sinh viên và đề thi từ Excel/CSV theo file mẫu; kiểm tra lỗi theo từng dòng trước khi áp dụng; xem trước đề và đáp án; dùng thử ngay hoặc tạo gói file dữ liệu.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="about-section" id="cong-nghe">
+      <h2>3. Công nghệ</h2>
+      <div class="chips">
+        <span class="chip">HTML5</span><span class="chip">CSS3 (biến màu, Grid, Flexbox)</span><span class="chip">JavaScript ES2020</span>
+        <span class="chip">Fullscreen API</span><span class="chip">Page Visibility API</span><span class="chip">localStorage / sessionStorage</span>
+        <span class="chip">EmailJS</span><span class="chip">SheetJS (đọc/ghi Excel)</span><span class="chip">JSZip</span><span class="chip">File API, kéo thả</span><span class="chip">Google Fonts — Be Vietnam Pro</span><span class="chip">GitHub Pages</span>
+      </div>
+      <p class="muted">Không dùng framework hay thư viện giao diện: toàn bộ giao diện, biểu đồ và hộp thoại được viết bằng HTML/CSS/JS thuần (SheetJS và JSZip chỉ được tải khi giảng viên nhập/xuất file). Giao diện hỗ trợ chế độ sáng/tối và hiển thị tốt trên điện thoại.</p>
+    </section>
+
+    <section class="about-section" id="kien-truc">
+      <h2>4. Kiến trúc</h2>
+      <p>Mọi trang chỉ lấy và gửi dữ liệu qua <strong>một lớp duy nhất</strong> là <code>js/api.js</code>. Lớp này chọn "bộ chuyển đổi" (adapter) theo cấu hình, nhờ đó bản đồ án chạy không cần server mà sau này vẫn chuyển lên server được, giao diện giữ nguyên.</p>
+      <figure class="arch card" aria-label="Sơ đồ kiến trúc">
+        <div class="arch-row">
+          <div class="arch-box">index.html</div><div class="arch-box">login.html</div><div class="arch-box">exam.html</div>
+          <div class="arch-box">result.html</div><div class="arch-box">admin.html</div><div class="arch-box">import.html</div>
+        </div>
+        <div class="arch-arrow" aria-hidden="true">↓ chỉ gọi API.xxx()</div>
+        <div class="arch-row"><div class="arch-box arch-core">js/api.js — lớp dữ liệu</div></div>
+        <div class="arch-arrow" aria-hidden="true">↓ CONFIG.MODE</div>
+        <div class="arch-row arch-split">
+          <div class="arch-col">
+            <div class="arch-box arch-now">adapters/local.js <small>bản đồ án (hiện tại)</small></div>
+            <div class="arch-leaf">data/*.js · localStorage · EmailJS</div>
+          </div>
+          <div class="arch-col">
+            <div class="arch-box arch-later">adapters/server.js <small>bản có server (sau này)</small></div>
+            <div class="arch-leaf">Backend · CSDL · gửi mail phía server</div>
+          </div>
+        </div>
+        <figcaption class="muted">Đổi <code>MODE: 'local'</code> thành <code>'server'</code> trong <code>js/config.js</code> là chuyển toàn bộ website sang backend.</figcaption>
+      </figure>
+    </section>
+
+    <section class="about-section" id="so-do">
+      <h2>5. Sơ đồ website</h2>
+      <div class="sitemap">
+        <div class="sm-node sm-root">Trang chủ<br><small>index.html</small></div>
+        <div class="sm-children">
+          <div class="sm-branch">
+            <div class="sm-node">Vào thi<br><small>login.html</small></div>
+            <div class="sm-node">Phòng thi<br><small>exam.html</small></div>
+            <div class="sm-node">Kết quả<br><small>result.html</small></div>
+          </div>
+          <div class="sm-branch">
+            <div class="sm-node">Giảng viên<br><small>admin.html</small></div>
+            <div class="sm-node">Nhập dữ liệu<br><small>import.html</small></div>
+          </div>
+          <div class="sm-branch"><div class="sm-node">Giới thiệu<br><small>about.html</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="gioi-han">
+      <h2>6. Giới hạn &amp; hướng phát triển</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Giới hạn của bản tĩnh</h3>
+          <ul class="list">
+            <li>Đáp án nằm trong thư mục <code>data/answers/</code> của website, mở công cụ nhà phát triển là xem được.</li>
+            <li>Giờ bắt đầu và bài làm lưu ở trình duyệt của sinh viên.</li>
+            <li>Khóa EmailJS và mật khẩu giảng viên nằm trong mã nguồn.</li>
+            <li>Trang giảng viên chỉ thấy bài làm trên cùng một trình duyệt.</li>
+            <li>Trang web chỉ <em>phát hiện</em> được việc rời phòng thi, không chặn được Alt+Tab, điện thoại hay máy thứ hai.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Hướng phát triển</h3>
+          <ul class="list">
+            <li>Chuyển lên server (Google Apps Script + Google Sheets, Firebase hoặc Supabase): đáp án, chấm điểm, giờ thi và gửi mail đều do server xử lý.</li>
+            <li>Đăng nhập giảng viên thật, xem kết quả cả lớp theo thời gian thực.</li>
+            <li>Ngân hàng câu hỏi, trộn câu và trộn đáp án cho từng sinh viên.</li>
+            <li>Kết hợp Safe Exam Browser cho kỳ thi cần khóa máy.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="nhom">
+      <h2>7. Nhóm thực hiện</h2>
+      <div class="card">
+        <dl class="info-list">
+          <dt>Trường</dt><dd>Đại học Hoa Sen</dd>
+          <dt>Môn học</dt><dd>Thiết kế Web &amp; Đồ họa</dd>
+          <dt>Giảng viên hướng dẫn</dt><dd>(điền tên giảng viên)</dd>
+          <dt>Liên hệ</dt><dd><a href="mailto:quizhub.team@example.com">quizhub.team@example.com</a></dd>
+        </dl>
+        <div class="table-wrap">
+          <table class="table table-compact">
+            <thead><tr><th scope="col">STT</th><th scope="col">Họ tên</th><th scope="col">MSSV</th><th scope="col">Phụ trách</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>(Thành viên 1)</td><td>MSSV</td><td>Trưởng nhóm, kiến trúc &amp; lớp dữ liệu</td></tr>
+              <tr><td>2</td><td>(Thành viên 2)</td><td>MSSV</td><td>Phòng thi, đồng hồ, giám sát</td></tr>
+              <tr><td>3</td><td>(Thành viên 3)</td><td>MSSV</td><td>Giao diện, CSS, responsive</td></tr>
+              <tr><td>4</td><td>(Thành viên 4)</td><td>MSSV</td><td>Trang giảng viên, xuất CSV</td></tr>
+              <tr><td>5</td><td>(Thành viên 5)</td><td>MSSV</td><td>Email, kiểm thử, báo cáo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script>renderHeader('about'); renderFooter();</script>
+</body>
+</html>

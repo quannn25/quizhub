@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuizHub — Thi trắc nghiệm online</title>
+  <meta name="description" content="Hệ thống thi trắc nghiệm online: đúng mã đề theo MSSV, đồng hồ đếm ngược, tự nộp bài và tự chấm điểm.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">Đề án Thiết kế Web &amp; Đồ họa</span>
+          <h1>Thi trắc nghiệm online <span>nhanh, gọn, minh bạch</span></h1>
+          <p>Sinh viên đăng nhập bằng MSSV, nhận đúng mã đề của mình, làm bài với đồng hồ đếm ngược và biết điểm ngay sau khi nộp.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="login.html">Vào thi ngay</a>
+            <a class="btn btn-outline btn-lg" href="#quy-che">Xem quy chế</a>
+          </div>
+        </div>
+
+        <div class="card hero-art" aria-hidden="true">
+          <div class="mock-head">
+            <strong>Câu 3 / 10</strong>
+            <span class="mock-timer">12:48</span>
+          </div>
+          <div class="mock-q">
+            <div class="mock-bar" style="flex:none;width:85%;height:14px"></div>
+            <div class="mock-bar" style="flex:none;width:60%;height:14px;margin-bottom:6px"></div>
+            <div class="mock-row"><span class="mock-dot">A</span><span class="mock-bar"></span></div>
+            <div class="mock-row on"><span class="mock-dot">B</span><span class="mock-bar"></span></div>
+            <div class="mock-row"><span class="mock-dot">C</span><span class="mock-bar"></span></div>
+            <div class="mock-row"><span class="mock-dot">D</span><span class="mock-bar"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Tính năng chính</h2>
+        <div class="features">
+          <article class="card feature">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
+            <h3>Đúng đề theo MSSV</h3>
+            <p>Mỗi sinh viên được gán sẵn một mã đề, đăng nhập là vào đúng đề.</p>
+          </article>
+          <article class="card feature">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg></div>
+            <h3>Đồng hồ &amp; tự nộp</h3>
+            <p>Hiển thị thời gian còn lại, hết giờ hệ thống tự nộp bài.</p>
+          </article>
+          <article class="card feature">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+            <h3>Quay lại câu bất kỳ</h3>
+            <p>Bảng câu hỏi cho biết câu đã làm, chưa làm và câu đánh dấu xem lại.</p>
+          </article>
+          <article class="card feature">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <h3>Chấm điểm tự động</h3>
+            <p>Nộp bài là có điểm ngay, kèm chi tiết từng câu đúng/sai.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quy-che">
+      <div class="container">
+        <div class="card">
+          <h2 class="section-title">Quy chế làm bài</h2>
+          <ol class="rules">
+            <li>Đăng nhập bằng đúng mã số sinh viên của mình. Mỗi sinh viên chỉ được làm bài một lần.</li>
+            <li>Thời gian bắt đầu tính từ lúc bấm "Bắt đầu làm bài" và không dừng lại khi tải lại trang.</li>
+            <li>Có thể chuyển qua lại giữa các câu và đổi đáp án bất kỳ lúc nào trước khi nộp.</li>
+            <li>Khi hết giờ, hệ thống tự động nộp bài với các câu đã chọn.</li>
+            <li>Không chuyển sang tab hoặc ứng dụng khác trong lúc thi.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script>renderHeader('home'); renderFooter();</script>
+</body>
+</html>
